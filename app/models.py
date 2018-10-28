@@ -17,6 +17,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow())
+    post = db.relationship('Post', backref='author',lazy='dynamic')
 
     followed = db.relationship('User', secondary=followers,
                                primaryjoin=(followers.c.follower_id == id),
@@ -41,7 +42,7 @@ class User(UserMixin, db.Model):
         if self.is_following(user):
             self.followed.remove(user)
 
-    def followed_post(self):
+    def followed_posts(self):
         return Post.query.join(
             followers, (followers.c.followed_id == Post.user_id)).filter(
                 followers.c.follower_id == self.id).order_by(
