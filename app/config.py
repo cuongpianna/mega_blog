@@ -15,3 +15,4 @@ class Config:
     POSTS_PER_PAGE = 3
     LANGUAGES = ['en', 'es']
     ELASTICSEARCH_URL = 'http://localhost:9200'
+    REDIS_URL = 'localhost:6379'
