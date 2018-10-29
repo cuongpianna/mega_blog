@@ -112,6 +112,7 @@ def follow(username):
     flash('You are following {}!'.format(username))
     return redirect(url_for('user', username=username))
 
+
 @app.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
@@ -151,6 +152,7 @@ def reset_password_request():
         return redirect(url_for('login'))
     return render_template('reset_password_request.html',
                            title='Reset Password', form=form)
+
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):

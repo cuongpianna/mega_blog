@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
 </head>
 <body>
     <div>Micro blog
@@ -27,5 +29,10 @@
     {% endwith %}
     {% block content %}
     {% endblock %}
+    {% block scripts %}
+        
+        {{ moment.include_moment() }}
+    {% endblock %}
+
 </body>
 </html>
