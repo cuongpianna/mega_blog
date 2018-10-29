@@ -8,6 +8,7 @@ from flask_login import LoginManager
 from flask_moment import Moment
 from flask_babel import Babel
 from flask_babel import lazy_gettext as _l
+from elasticsearch import Elasticsearch
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
 from .config import Config
@@ -24,6 +25,7 @@ login.login_message = _l('Please log in to access this page.')
 
 def create_app(config_class=Config):
     app = Flask(__name__)
+    app.debug = True
     app.config.from_object(config_class)
     db.init_app(app)
     migrate.init_app(app, db)
@@ -31,6 +33,7 @@ def create_app(config_class=Config):
     mail.init_app(app)
     moment.init_app(app)
     babel.init_app(app)
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']])
 
     from app import models
     from app.errors import bp as errors_bp
@@ -54,7 +57,7 @@ def create_app(config_class=Config):
 
         app.logger.setLevel(logging.INFO)
         app.logger.info('Microblog startup')
-        return app
+    return app
 
 
 @babel.localeselector

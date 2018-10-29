@@ -14,3 +14,4 @@ class Config:
     ADMINS = ['cuongpianna1996@gmail.com']
     POSTS_PER_PAGE = 3
     LANGUAGES = ['en', 'es']
+    ELASTICSEARCH_URL = 'http://localhost:9200'
