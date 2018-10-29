@@ -13,3 +13,4 @@ class Config:
     MAIL_PASSWORD = '01649886076'
     ADMINS = ['cuongpianna1996@gmail.com']
     POSTS_PER_PAGE = 3
+    LANGUAGES = ['en', 'es']
